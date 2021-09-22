@@ -10,7 +10,7 @@ export const randomWalk = (grid, startNode, endNode) => {
   while (true) {
     closestNode.isVisited = true;
     visitedNodesInOrder.push(closestNode);
-    if (closestNode === finishNode) return visitedNodesInOrder;
+    if (closestNode === endNode) return visitedNodesInOrder;
     let randomNeighbour = getRandomNeighbour(closestNode, grid, endNode);
     let nodesVisited = numNodesVisited(grid);
     if ((nodesVisited = maxNodes - 2)) {

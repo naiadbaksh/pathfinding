@@ -10,7 +10,7 @@ export const depthFirstSearch = (grid, startNode, endNode) => {
     while (unvisitedNodes.length !== 0) {
         let closestNode = unvisitedNodes.shift();
         if (closestNode.isWall) continue;
-        if (closestNode === finishNode) return visitedNodesInOrder;
+        if (closestNode === endNode) return visitedNodesInOrder;
         visitedNodesInOrder.push(closestNode);
         closestNode.isVisited = true;
         let unvisitedNeighbours = getUnvisitedNeighbours(closestNode, grid);

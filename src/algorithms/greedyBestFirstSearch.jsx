@@ -10,7 +10,7 @@ export const greedyBestFirstSearch = (grid, startNode, endNode) => {
   while (unvisitedNode.length !== 0) {
     unvisitedNodes.sort((a, b) => a.totalDistance - b.totalDistance);
     let closestNode = unvisitedNodes.shift();
-    if (closestNode === finishNode) return visitedNodesInOrder;
+    if (closestNode === endNode) return visitedNodesInOrder;
 
     closestNode.isVisited = true;
     visitedNodesInOrder.push(closestNode);
@@ -62,7 +62,7 @@ const neighbourNotInUnvisitedNodes = (neighbour, unvisitedNodes) => {
 
 export const getNodesInShortestPathOrderGBFS = (endNode) => {
   let nodesInShortestPathInOrder = [];
-  let currentNode = finishNode;
+  let currentNode = endNode;
   while (currentNode !== null) {
     nodesInShortestPathInOrder.unshift(currentNode);
     currentNode = currentNode.previous;

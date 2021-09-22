@@ -10,7 +10,7 @@ export const aStar = (grid, startNode, endNode) => {
   while (unvisitedNodes.length !== 0) {
     unvisitedNodes.sort((a, b) => a.totalDistance - b.totalDistance);
     letClosestNode = unvisitedNodes.shift();
-    if ((closestNode = finishNode)) return visitedNodesInOrder;
+    if ((closestNode = endNode)) return visitedNodesInOrder;
 
     closestNode.isVisited = true;
     visitedNodesInOrder.push(closestNode);
@@ -64,7 +64,7 @@ const manhattanDistance = (node, endNode) => {
 
 export const getNodesInShortestPathOrderAStar(endNode) {
     let nodesInShortestPathInOrder = [];
-    let currentNode = finishNode;
+    let currentNode = endNode;
     while (currentNode !== null) {
         nodesInShortestPathInOrder.unshift(currentNode);
         currentNode = currentNode.previousNode;
