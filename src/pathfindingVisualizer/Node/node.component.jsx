@@ -9,9 +9,9 @@ const Node = ({
   isWall,
   isVisited,
   isShortest,
-  // onMouseEnter,
-  // onMouseDown,
-  // onMouseUp,
+  onMouseEnter,
+  onMousePressed,
+  onMouseReleased,
   width,
   height,
   numRows,
@@ -48,9 +48,9 @@ const Node = ({
       id={`node-${row}-${col}`}
       className={`${classes}`}
       style={{ "--width": `${cellWidth}px`, "--height": `${cellHeight}px` }}
-      // onMouseEnter={() => onMouseEnter(row, col)}
-      // onMouseDown={() => onMouseDown(row, col)}
-      // onMouseUp={() => onMouseUp()}
+      onMouseEnter={() => onMouseEnter(row, col)}
+      onMousePressed={() => onMousePressed(row, col)}
+      onMouseReleased={() => onMouseReleased()}
     ></div>
   );
 };

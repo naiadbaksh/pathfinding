@@ -11,7 +11,7 @@ export const randomMaze = (grid, startNode, endNode) => {
       )
         continue;
       if (Math.random() < 0.33) {
-        wall.push([row, col]);
+        walls.push([row, col]);
       }
     }
   }

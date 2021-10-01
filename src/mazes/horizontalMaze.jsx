@@ -1,12 +1,12 @@
 let walls;
-export const verticalMaze = (grid, startNode, endNode) => {
+export const horizontalMaze = (grid, startNode, endNode) => {
   if (!startNode || !endNode || startNode === endNode) {
     return false;
   }
   let vertical = range(grid[0].length);
   let horizontal = range(grid.length);
   walls = [];
-  getVerticalWalls(vertical, horizontal, startNode, endNode);
+  getHorizontalWalls(vertical, horizontal, startNode, endNode);
   return walls;
 };
 
@@ -18,7 +18,7 @@ const range = (len) => {
   return result;
 };
 
-function getHortizontalWalls(vertical, horizontal, startNode, endNode) {
+const getHorizontalWalls = (vertical, horizontal, startNode, endNode) => {
   if (horizontal.length < 2) {
     return;
   }
@@ -29,7 +29,7 @@ function getHortizontalWalls(vertical, horizontal, startNode, endNode) {
       addWall(num, vertical, startNode, endNode);
     }
   }
-}
+};
 
 const addWall = (num, vertical, startNode, endNode) => {
   let isStartorEnd = false;

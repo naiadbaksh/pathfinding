@@ -9,7 +9,7 @@ export const aStar = (grid, startNode, endNode) => {
 
   while (unvisitedNodes.length !== 0) {
     unvisitedNodes.sort((a, b) => a.totalDistance - b.totalDistance);
-    letClosestNode = unvisitedNodes.shift();
+    let closestNode = unvisitedNodes.shift();
     if ((closestNode = endNode)) return visitedNodesInOrder;
 
     closestNode.isVisited = true;
@@ -35,39 +35,39 @@ export const aStar = (grid, startNode, endNode) => {
   return visitedNodesInOrder;
 };
 
-const getNeighbours = (node, grid) {
-    let neighbours = [];
-    let { row, col } = node;
-    if (col !== grid[0].length - 1) neighbours.push(grid[row][col + 1]);
-    if (row ! == grid.length - 1) neighbours.push(grid[row + 1][col]);
-    if (col !== 0) neighbours.push(grid[row][col -1]);
-    if (row !== 0) neighbours.push(grid[row - 1][col]);
-    return neighbours.filter( 
-        (neighbour) => !neighbour.isWall && !neighbour.isVisited
-    );
-}
+const getNeighbours = (node, grid) => {
+  let neighbours = [];
+  let { row, col } = node;
+  if (col !== grid[0].length - 1) neighbours.push(grid[row][col + 1]);
+  if (row !== grid.length - 1) neighbours.push(grid[row + 1][col]);
+  if (col !== 0) neighbours.push(grid[row][col - 1]);
+  if (row !== 0) neighbours.push(grid[row - 1][col]);
+  return neighbours.filter(
+    (neighbour) => !neighbour.isWall && !neighbour.isVisited
+  );
+};
 
-const neighbourNotInUnvisitedNodes = (neighbour, unvisitedNodes) {
-    for (let node of unvisitedNodes) {
-        if (node.row === neighbour.row && node.col === neighbour.col) {
-            return false;
-        }
+const neighbourNotInUnvisitedNodes = (neighbour, unvisitedNodes) => {
+  for (let node of unvisitedNodes) {
+    if (node.row === neighbour.row && node.col === neighbour.col) {
+      return false;
     }
-    return true;
-}
+  }
+  return true;
+};
 
 const manhattanDistance = (node, endNode) => {
-    let x = Math.abs(node.row - endNode.row);
-    let y = Math.abs(node.col - endNode.col);
-    return x+y;
-}
+  let x = Math.abs(node.row - endNode.row);
+  let y = Math.abs(node.col - endNode.col);
+  return x + y;
+};
 
-export const getNodesInShortestPathOrderAStar(endNode) {
-    let nodesInShortestPathInOrder = [];
-    let currentNode = endNode;
-    while (currentNode !== null) {
-        nodesInShortestPathInOrder.unshift(currentNode);
-        currentNode = currentNode.previousNode;
-    } 
-    return nodesInShortestPathInOrder;
-}
+export const getNodesInShortestPathOrderAStar = (endNode) => {
+  let nodesInShortestPathInOrder = [];
+  let currentNode = endNode;
+  while (currentNode !== null) {
+    nodesInShortestPathInOrder.unshift(currentNode);
+    currentNode = currentNode.previousNode;
+  }
+  return nodesInShortestPathInOrder;
+};

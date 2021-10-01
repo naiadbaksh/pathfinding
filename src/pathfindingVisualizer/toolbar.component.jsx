@@ -10,7 +10,7 @@ const Toolbar = (props) => {
   const [speedState, setSpeedState] = useState("Speed");
 
   const selectAlgorithm = (selection) => {
-    if (visualizingAlgorithm) {
+    if (props.visualizing) {
       return;
     }
     if (
@@ -28,7 +28,7 @@ const Toolbar = (props) => {
   };
 
   const selectMaze = (selection) => {
-    if (visualizingAlgorithm || generatingMaze) {
+    if (props.visualizing || props.creatingMaze) {
       return;
     }
     if (
@@ -46,7 +46,7 @@ const Toolbar = (props) => {
   };
 
   const visualizeAlgorithm = () => {
-    if (visualizeAlgorithm || generatingMaze) {
+    if (props.visualizing || props.creatingMaze) {
       return;
     }
     if (
@@ -66,13 +66,13 @@ const Toolbar = (props) => {
         "Visualize Random Search",
       ];
       let functionsList = [
-        visualizeDijkstra(),
-        visualizeAStar(),
-        visualizeGreedyBfs(),
-        visualizeBidirectionalGreedy(),
-        visualizeBreadthFirstSeach(),
-        visualizeDepthFirstSearch(),
-        visualizeRandomSearch(),
+        props.visualizeDijkstra(),
+        props.visualizeAStar(),
+        props.visualizeGreedyBFS(),
+        props.visualizeBidirectionalGreedy(),
+        props.visualizeBreadthFirstSeach(),
+        props.visualizeDepthFirstSearch(),
+        props.visualizeRandomSearch(),
       ];
       for (const [idx, algo] of algoList.entries()) {
         if (algo === algorithm) {
@@ -82,8 +82,8 @@ const Toolbar = (props) => {
     }
   };
 
-  const generatingMaze = () => {
-    if (visualizeAlgorithm || generatingMaze) {
+  const creatingMaze = () => {
+    if (props.visualizing || props.creatingMaze) {
       return;
     }
     if (mazeState || pathState) {
@@ -100,10 +100,10 @@ const Toolbar = (props) => {
         "Generate Horiztonal Maze",
       ];
       let functionsList = [
-        generateRandomMaze(),
-        generateRecursiveMaze(),
-        generateVerticalMaze(),
-        generateHorizontalMaze(),
+        props.generateRandomMaze(),
+        props.generateRecursiveMaze(),
+        props.generateVerticalMaze(),
+        props.generateHorizontalMaze(),
       ];
       for (const [idx, mazeType] in mazeList.entries()) {
         if (mazeType === maze) {
@@ -114,10 +114,10 @@ const Toolbar = (props) => {
   };
 
   const clearGrid = () => {
-    if (visualizeAlgorithm || generatingMaze) {
+    if (props.visualizing || props.creatingMaze) {
       return;
     }
-    clearGrid();
+    props.clearGrid();
     setAlgorithm("Visualize Algorithm");
     setMaze("Generate Maze");
     setPathState(false);
@@ -125,7 +125,7 @@ const Toolbar = (props) => {
   };
 
   const clearPath = () => {
-    if (visualizeAlgorithm || generatingMaze) {
+    if (props.visualizing || props.creatingMaze) {
       return;
     }
     clearPath();
@@ -134,7 +134,7 @@ const Toolbar = (props) => {
   };
 
   const clearTemp = () => {
-    if (visualizeAlgorithm || generatingMaze) {
+    if (props.visualizing || props.creatingMaze) {
       return;
     }
     clearGrid();
@@ -143,21 +143,21 @@ const Toolbar = (props) => {
   };
 
   const changeSpeed = (speed) => {
-    if (visualizeAlgorithm || generatingMaze) {
+    if (props.visualizing || props.creatingMaze) {
       return;
     }
     let value = [10, 10];
     if (speed === "Slow") value = [50, 30];
-    else if (speed == "Medium") value = [25, 20];
-    else if (speed == "Fast") value = [10, 10];
+    else if (speed === "Medium") value = [25, 20];
+    else if (speed === "Fast") value = [10, 10];
     setSpeedState(speed);
-    updateSpeed(value[0], value[1]);
+    props.updateSpeed(value[0], value[1]);
   };
 
   return (
-    <nav className="toolbar toolbar-expand toolbar-dark bg-dark">
-      <div className="toolbar-collapse" id="toolbarNavDrop">
-        <ul className="toolbar-nav">
+    <nav className="navbar navbar-expand navbar-dark bg-dark">
+      <div className="navbar-collapse" id="navbarNavDrop">
+        <ul className="navbar-nav">
           <li className="nav-item dropdown">
             <div className="dropdown">
               <button
@@ -170,10 +170,7 @@ const Toolbar = (props) => {
               >
                 Algorithms
               </button>
-              <div
-                className="dropdown-menu"
-                aria-labelledby="algorithmDropdown"
-              >
+              <div className="dropdown-menu" aria-labelledby="dropdownMenu1">
                 <button
                   className="dropdown-item btn-light"
                   type="button"
@@ -288,7 +285,7 @@ const Toolbar = (props) => {
             <button
               className="btn btn-success"
               type="button"
-              onClick={() => generateMaze()}
+              onClick={() => creatingMaze()}
             >
               {maze}
             </button>

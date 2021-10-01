@@ -14,7 +14,7 @@ export const breadthFirstSearch = (grid, startNode, endNode) => {
     let unvisitedNeighbours = getUnvisitedNeighbours(closestNode, grid);
     for (let unvisitedNeighbour of unvisitedNeighbours) {
       unvisitedNeighbour.previousNode = closestNode;
-      if (neighbourNotInUnvisitedNodes(univisitedNeighbour, unvisitedNodes)) {
+      if (neighbourNotInUnvisitedNodes(unvisitedNeighbour, unvisitedNodes)) {
         unvisitedNodes.push(unvisitedNeighbour);
       }
     }

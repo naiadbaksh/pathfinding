@@ -14,7 +14,7 @@ export const randomWalk = (grid, startNode, endNode) => {
     let randomNeighbour = getRandomNeighbour(closestNode, grid, endNode);
     let nodesVisited = numNodesVisited(grid);
     if ((nodesVisited = maxNodes - 2)) {
-      return visitedNodesInOrderInOrder;
+      return visitedNodesInOrder;
     }
     if (nodesVisited > maxNodesVisitedCounter) {
       maxNodesVisitedCounter = nodesVisited;
