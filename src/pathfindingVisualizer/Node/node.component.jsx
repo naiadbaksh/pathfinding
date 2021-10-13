@@ -9,13 +9,13 @@ const Node = ({
   isWall,
   isVisited,
   isShortest,
-  onMouseEnter,
-  onMousePressed,
-  onMouseReleased,
   width,
   height,
   numRows,
   numCols,
+  onMouseDown,
+  onMouseUp,
+  onMouseEnter,
 }) => {
   //Extra classes to add to the nodes using conditional rendering
   const classes = isStart
@@ -48,9 +48,9 @@ const Node = ({
       id={`node-${row}-${col}`}
       className={`${classes}`}
       style={{ "--width": `${cellWidth}px`, "--height": `${cellHeight}px` }}
+      onMouseDown={() => onMouseDown(row, col)}
       onMouseEnter={() => onMouseEnter(row, col)}
-      onMousePressed={() => onMousePressed(row, col)}
-      onMouseReleased={() => onMouseReleased()}
+      onMouseUp={() => onMouseUp()}
     ></div>
   );
 };

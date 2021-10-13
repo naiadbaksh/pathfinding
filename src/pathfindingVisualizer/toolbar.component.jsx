@@ -49,6 +49,10 @@ const Toolbar = (props) => {
     if (props.visualizing || props.creatingMaze) {
       return;
     }
+    if (pathState) {
+      clearTemp();
+      return;
+    }
     if (
       algorithm === "Visualize Algorithm" ||
       algorithm === "Select an Algorithm"
@@ -56,33 +60,29 @@ const Toolbar = (props) => {
       setAlgorithm("Select an Algorithm");
     } else {
       setPathState(true);
-      let algoList = [
-        "Visualize Dijkstra",
-        "Visualize A*",
-        "Visualize Greedy BFS",
-        "Visualize Bidirectional Greedy",
-        "Visualize Breadth First Search",
-        "Visualize DepthFirstSearch",
-        "Visualize Random Search",
-      ];
-      let functionsList = [
-        props.visualizeDijkstra(),
-        props.visualizeAStar(),
-        props.visualizeGreedyBFS(),
-        props.visualizeBidirectionalGreedy(),
-        props.visualizeBreadthFirstSeach(),
-        props.visualizeDepthFirstSearch(),
-        props.visualizeRandomSearch(),
-      ];
-      for (const [idx, algo] of algoList.entries()) {
-        if (algo === algorithm) {
-          functionsList[idx]();
-        }
+      if (algorithm === "Visualize Dijkstra") {
+        props.visualizeDijkstra();
+      } else if (algorithm === "Visualize A*") {
+        props.visualizeAStar();
+      } else if (algorithm === "Visualize Greedy BFS") {
+        props.visualizeGreedyBFS();
+      } else if (algorithm === "Visualize Bidirectional Greedy") {
+        props.visualizeBidirectionalGreedySearch();
+      } else if (algorithm === "Visualize Breadth First Search") {
+        props.visualizeBidirectionalGreedySearch();
+      } else if (algorithm === "Visualize Breadth First Search") {
+        props.visualizeBFS();
+      } else if (algorithm === "Visualize Depth First Search") {
+        props.visualizeDFS();
+      } else if (algorithm === "Visualize Depth First Search") {
+        props.visualizeDFS();
+      } else if (algorithm === "Visualize Random Walk") {
+        props.visualizeRandomWalk();
       }
     }
   };
 
-  const creatingMaze = () => {
+  const generateMaze = () => {
     if (props.visualizing || props.creatingMaze) {
       return;
     }
@@ -93,22 +93,14 @@ const Toolbar = (props) => {
       setMaze("Select an Maze");
     } else {
       setMazeState(true);
-      let mazeList = [
-        "Generate Random Maze",
-        "Generate Recursive Maze",
-        "Generate Vertical Maze",
-        "Generate Horiztonal Maze",
-      ];
-      let functionsList = [
-        props.generateRandomMaze(),
-        props.generateRecursiveMaze(),
-        props.generateVerticalMaze(),
-        props.generateHorizontalMaze(),
-      ];
-      for (const [idx, mazeType] in mazeList.entries()) {
-        if (mazeType === maze) {
-          functionsList[idx]();
-        }
+      if (maze === "Generate Random Maze") {
+        props.generateRandomMaze();
+      } else if (maze === "Generate Recursive Maze") {
+        props.generateRecursiveDivisionMaze();
+      } else if (maze === "Generate Vertical Maze") {
+        props.generateVerticalMaze();
+      } else if (maze === "Generate Horizontal Maze") {
+        props.generateHorizontalMaze();
       }
     }
   };
@@ -128,7 +120,7 @@ const Toolbar = (props) => {
     if (props.visualizing || props.creatingMaze) {
       return;
     }
-    clearPath();
+    props.clearPath();
     setPathState(false);
     setMazeState(false);
   };
@@ -137,7 +129,7 @@ const Toolbar = (props) => {
     if (props.visualizing || props.creatingMaze) {
       return;
     }
-    clearGrid();
+    props.clearGrid();
     setPathState(false);
     setMazeState(false);
   };
@@ -285,7 +277,7 @@ const Toolbar = (props) => {
             <button
               className="btn btn-success"
               type="button"
-              onClick={() => creatingMaze()}
+              onClick={() => generateMaze()}
             >
               {maze}
             </button>

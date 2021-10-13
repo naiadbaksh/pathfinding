@@ -28,6 +28,9 @@ const getHorizontalWalls = (vertical, horizontal, startNode, endNode) => {
     if (choice === 0 && num % 2 !== 0) {
       addWall(num, vertical, startNode, endNode);
     }
+    if (choice === 1 && num % 2 === 0) {
+      addWall(num, vertical, startNode, endNode);
+    }
   }
 };
 

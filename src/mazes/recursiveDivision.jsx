@@ -19,6 +19,42 @@ const range = (len) => {
   return result;
 };
 
+const addWall = (dir, num, vertical, horizontal, startNode, endNode) => {
+  let isStartOrEnd = false;
+  let tempWalls = [];
+  if (dir === 0) {
+    if (horizontal.length === 2) return;
+    for (let temp of horizontal) {
+      if (
+        (temp === startNode.row && num === startNode.col) ||
+        (temp === endNode.row && num === endNode.col)
+      ) {
+        isStartOrEnd = true;
+        continue;
+      }
+      tempWalls.push([temp, num]);
+    }
+  } else {
+    if (vertical.length === 2) return;
+    for (let temp of vertical) {
+      if (
+        (num === startNode.row && temp === startNode.col) ||
+        (num === endNode.row && temp === endNode.col)
+      ) {
+        isStartOrEnd = true;
+        continue;
+      }
+      tempWalls.push([num, temp]);
+    }
+  }
+  if (!isStartOrEnd) {
+    tempWalls.splice(generateRandomNumber(tempWalls.length), 1);
+  }
+  for (let wall of tempWalls) {
+    walls.push(wall);
+  }
+};
+
 const getRecursiveWalls = (vertical, horizontal, grid, startNode, endNode) => {
   if (vertical.length < 2 || horizontal.length < 2) {
     return;
@@ -44,7 +80,7 @@ const getRecursiveWalls = (vertical, horizontal, grid, startNode, endNode) => {
       endNode
     );
     getRecursiveWalls(
-      vertical.slice(0, vertical.indexOf(num) + 1),
+      vertical.slice(vertical.indexOf(num) + 1),
       horizontal,
       grid,
       startNode,
@@ -61,7 +97,7 @@ const getRecursiveWalls = (vertical, horizontal, grid, startNode, endNode) => {
     );
     getRecursiveWalls(
       vertical,
-      horizontal.slice(0, horizontal.indexOf(num) + 1),
+      horizontal.slice(horizontal.indexOf(num) + 1),
       grid,
       startNode,
       endNode
@@ -98,38 +134,4 @@ const generateRandomNumber = (max) => {
   return randomNum;
 };
 
-const addWall = (dir, num, vertical, horizontal, startNode, endNode) => {
-  let isStartorEnd = false;
-  let tempWalls = [];
-  if (dir === 0) {
-    if (horizontal.length === 2) return;
-    for (let temp of horizontal) {
-      if (
-        (temp === startNode.row && num === startNode.col) ||
-        (temp === endNode.row && num === endNode.col)
-      ) {
-        isStartorEnd = true;
-        continue;
-      }
-      tempWalls.push([temp, num]);
-    }
-  } else {
-    if (vertical.length === 2) return;
-    for (let temp of vertical) {
-      if (
-        (num === startNode.row && temp === startNode.col) ||
-        (num === endNode.row && temp === endNode.col)
-      ) {
-        isStartorEnd = true;
-        continue;
-      }
-      tempWalls.push([num, temp]);
-    }
-  }
-  if (!isStartorEnd) {
-    tempWalls.splice(generateRandomNumber(tempWalls.length), 1);
-  }
-  for (let wall of tempWalls) {
-    walls.push(wall);
-  }
-};
+// 0 = Horizontal, 1 = Vertical
