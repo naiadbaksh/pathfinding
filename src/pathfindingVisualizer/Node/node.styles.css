@@ -35,7 +35,7 @@
   height: var(--height);
   display: inline-block;
   animation-name: wallAnimation;
-  animation-duration: 2.5s;
+  animation-duration: 0.5s;
   animation-timing-function: ease-out;
   animation-direction: alternate;
   animation-fill-mode: forwards;
@@ -51,7 +51,7 @@
 
 .node-shortest-path {
   animation-name: shortestPathAnimation;
-  animation-duration: 0.5s;
+  animation-duration: 1s;
   animation-timing-function: ease-out;
   animation-direction: alternate;
   animation-fill-mode: forwards;

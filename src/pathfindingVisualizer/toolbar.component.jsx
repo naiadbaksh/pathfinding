@@ -90,7 +90,7 @@ const Toolbar = (props) => {
       clearTemp();
     }
     if (maze === "Generate Maze" || maze === "Select a Maze") {
-      setMaze("Select an Maze");
+      setMaze("Select a Maze");
     } else {
       setMazeState(true);
       if (maze === "Generate Random Maze") {

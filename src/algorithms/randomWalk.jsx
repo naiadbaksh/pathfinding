@@ -13,7 +13,7 @@ export const randomWalk = (grid, startNode, endNode) => {
     if (closestNode === endNode) return visitedNodesInOrder;
     let randomNeighbour = getRandomNeighbour(closestNode, grid, endNode);
     let nodesVisited = numNodesVisited(grid);
-    if ((nodesVisited = maxNodes - 2)) {
+    if (nodesVisited === maxNodes - 2) {
       return visitedNodesInOrder;
     }
     if (nodesVisited > maxNodesVisitedCounter) {
@@ -45,11 +45,11 @@ const getRandomNeighbour = (node, grid, endNode) => {
   );
   if (neighboursNotVisited.length > 0) {
     return neighboursNotVisited[
-      Math.floor(Math.random) * neighboursNotVisited.length
+      Math.floor(Math.random() * neighboursNotVisited.length)
     ];
   }
-  return neighboursNotVisited[
-    Math.floor(Math.random) * filteredNeighbours.length
+  return filteredNeighbours[
+    Math.floor(Math.random() * filteredNeighbours.length)
   ];
 };
 

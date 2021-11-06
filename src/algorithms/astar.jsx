@@ -10,7 +10,7 @@ export const aStar = (grid, startNode, endNode) => {
   while (unvisitedNodes.length !== 0) {
     unvisitedNodes.sort((a, b) => a.totalDistance - b.totalDistance);
     let closestNode = unvisitedNodes.shift();
-    if ((closestNode = endNode)) return visitedNodesInOrder;
+    if (closestNode === endNode) return visitedNodesInOrder;
 
     closestNode.isVisited = true;
     visitedNodesInOrder.push(closestNode);
