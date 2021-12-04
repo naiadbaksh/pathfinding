@@ -1,7 +1,6 @@
 .grid {
   font-size: 0;
   pointer-events: unset;
-
   position: absolute;
   left: 50%;
   margin-right: -50%;
